@@ -1,6 +1,6 @@
 # Marigold Reproducibility by xyclone10
 
-This reproducibility project examines [Marigold](https://ieeexplore.ieee.org/abstract/document/10655342/), a state-of-the-art monocular depth estimation model. We provide a concise, step-by-step process to replicate the results exactly as reported in the original paper.
+This reproducibility project examines [Marigold](https://ieeexplore.ieee.org/abstract/document/10655342/), a state-of-the-art monocular depth estimation model. We provide a concise, step-by-step process to replicate the results exactly as reported in the original paper. This repository refers to the original [source code](https://github.com/prs-eth/Marigold) provided by Marigold.
 
 ## Setup
 The code was tested on:
