@@ -42,13 +42,67 @@ There are four datasets in total, [Hypersim](https://github.com/apple/ml-hypersi
   ```
   wget http://horatio.cs.nyu.edu/mit/silberman/nyu_depth_v2/nyu_depth_v2_labeled.mat
   ```
-- Refer to this github [repo](https://github.com/cleinc/bts/tree/master), download the files in `bts/utils`, `extract_official_train_test_set_from_mat.py` and `splits.mat`
+- Refer to this GitHub [repo](https://github.com/cleinc/bts/tree/master), download the files in `bts/utils`, `extract_official_train_test_set_from_mat.py`, and `splits.mat`
 - Put all downloaded files in one folder and run
   ```
   python extract_official_train_test_set_from_mat.py nyu_depth_v2_labeled.mat splits.mat dataset/nyu_depth_v2/official_splits/
   ```
+- Check the file path and make sure it is similar to the one listed in the `data_split/nyu_depth/labeled/filelist_test.txt`.
 
 **KITTI**
 - Download the ground truth labels from [here](https://s3.eu-central-1.amazonaws.com/avg-kitti/data_depth_annotated.zip).
 - Download the RGB samples through this [script](https://s3.eu-central-1.amazonaws.com/avg-kitti/raw_data_downloader.zip).
-- Put all downloaded files in one folder and make sure the path is similar with the one listed in the `data_split/kitti_depth/eigen_test_files_with_gt.txt`
+- Put all downloaded files in one folder and make sure the path is similar to the one listed in the `data_split/kitti_depth/eigen_test_files_with_gt.txt`
+
+Put all prepared datasets under the path of `${BASE_DATA_DIR}`.
+
+## Reproduce The Experiments
+
+### Training
+Set environment parameters for the data directory:
+```
+export BASE_DATA_DIR=YOUR_DATA_DIR        # directory of training data
+export BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
+```
+
+Download Stable Diffusion v2 [checkpoint](https://huggingface.co/stabilityai/stable-diffusion-2) into `${BASE_CKPT_DIR}`.
+Alternative [link](https://www.kaggle.com/models/stabilityai/stable-diffusion-v2).
+
+Run the training script
+```
+python script/depth/train.py --config config/train_marigold_depth.yaml
+```
+
+### Evaluation and Inference
+Set environment parameters for the data directory:
+```
+export BASE_DATA_DIR=YOUR_DATA_DIR        # directory of training data
+export BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
+```
+
+Run the inference script first
+```
+bash script/depth/eval_old/11_infer_nyu.sh
+```
+
+Then, after that, run the evaluation script
+```
+bash script/depth/eval_old/12_eval_nyu.sh
+```
+
+## Experiments Guidebook
+
+### Zero-shot Performance
+To reproduce the best result as stated in the paper, do not change the config, and just run the experiment as it is.
+
+### Ablation: Training Noise
+In the file `config/train_marigold_depth.yaml`, change the `multi_res_noise strength` for multi-resolution noise and `multi_res_noise annealed` for the annealed schedule.
+
+### Ablation: Training Data Domain
+In the file `config/dataset_depth/dataset_train.yaml`, change the `prob_ls` configuration; the first index is for Hypersim, the second index is for VKITTI2.
+
+### Ablation: Test-time Ensembling
+In the file `script/depth/eval_old/11_infer_nyu.sh`, change the `ensemble_size`.
+
+### Ablation: Number of Denoising Steps
+In the file `script/depth/eval_old/11_infer_nyu.sh`, change the `denoise_steps`.
