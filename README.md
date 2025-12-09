@@ -57,14 +57,13 @@ There are four datasets in total, [Hypersim](https://github.com/apple/ml-hypersi
 Put all prepared datasets under the path of `${BASE_DATA_DIR}`.
 
 ## Reproduce The Experiments
-
-### Training
 Set environment parameters for the data directory:
 ```
 export BASE_DATA_DIR=YOUR_DATA_DIR        # directory of training data
 export BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
 ```
 
+### Training
 Download Stable Diffusion v2 [checkpoint](https://huggingface.co/stabilityai/stable-diffusion-2) into `${BASE_CKPT_DIR}`.
 Alternative [link](https://www.kaggle.com/models/stabilityai/stable-diffusion-v2).
 
@@ -74,12 +73,6 @@ python script/depth/train.py --config config/train_marigold_depth.yaml
 ```
 
 ### Evaluation and Inference
-Set environment parameters for the data directory:
-```
-export BASE_DATA_DIR=YOUR_DATA_DIR        # directory of training data
-export BASE_CKPT_DIR=YOUR_CHECKPOINT_DIR  # directory of pretrained checkpoint
-```
-
 Run the inference script first
 ```
 bash script/depth/eval_old/11_infer_nyu.sh
