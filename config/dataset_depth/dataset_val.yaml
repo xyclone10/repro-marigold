@@ -33,13 +33,13 @@ dataset:
 
   - name: nyu_depth
     disp_name: nyu_depth_train_small_100
-    dir: raw_nyuv2/test
+    dir: raw_nyuv2
     filenames: data_split/nyu_depth/labeled/filelist_test.txt
     eigen_valid_mask: true
 
   - name: kitti_depth
     disp_name: kitti_depth_val_from_train_sub_100
-    dir: kitti/kitti_sampled_val_800.tar
-    filenames: data_split/kitti_depth/eigen_val_from_train_sub_100.txt
+    dir: kitti
+    filenames: data_split/kitti_depth/eigen_test_files_with_gt.txt
     kitti_bm_crop: true
     valid_mask_crop: eigen

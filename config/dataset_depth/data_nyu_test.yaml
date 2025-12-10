@@ -1,5 +1,5 @@
 name: nyu_depth
 disp_name: nyu_depth_test_full
-dir: nyuv2/nyu_labeled_extracted.tar
-filenames: data_split/nyu_depth/labeled/filename_list_test.txt
+dir: raw_nyuv2
+filenames: data_split/nyu_depth/labeled/filelist_test.txt
 eigen_valid_mask: true

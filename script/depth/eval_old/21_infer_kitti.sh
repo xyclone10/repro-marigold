@@ -10,8 +10,8 @@ python script/depth/infer.py \
     --checkpoint $ckpt \
     --seed 1234 \
     --base_data_dir $BASE_DATA_DIR \
-    --denoise_steps 50 \
+    --denoise_steps 1 \
     --ensemble_size 10 \
     --processing_res 0 \
     --dataset_config config/dataset_depth/data_kitti_eigen_test.yaml \
-    --output_dir output/${subfolder}/kitti_eigen_test/prediction
+    --output_dir output/${subfolder}/kitti_eigen_test_d1/prediction
